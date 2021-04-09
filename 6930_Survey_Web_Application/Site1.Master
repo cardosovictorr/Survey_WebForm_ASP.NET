@@ -9,24 +9,22 @@
     </asp:ContentPlaceHolder>
 
     <link href="Styles.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <form id="form1" runat="server">
         
         <!--Navigation Bar-->
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="AboutUs.aspx">Abot Us</a></li>
-            <li><a href="ContactUs.aspx">Contact Us</a></li>
-            <li><a href="Search.aspx">Search</a></li>
-
-        </ul>
-        <!--
-        <div>
-            <a href="AboutUs.aspx">About Us</a>&nbsp; <a href="ContactUs.aspx">Contact Us</a>&nbsp; <a href="Search.aspx">Search</a>
+        <div class="topnav" id="myTopnav">
+            <a href="#" class="active">Home</a>
+            <a href="ContactUs.aspx">Contact</a>
+            <a href="AboutUs.aspx">About</a>
+            <a href="Search.aspx">Search</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
         </div>
-            -->
-        <!--This is my my content-->
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
@@ -37,5 +35,7 @@
         </div>
         
     </form>
+
+    <script src="myScript.js"></script>
 </body>
 </html>
