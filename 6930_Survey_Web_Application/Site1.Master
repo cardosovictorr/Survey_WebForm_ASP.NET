@@ -1,0 +1,41 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="_6930_Survey_Web_Application.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link href="Styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+        <!--Navigation Bar-->
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="AboutUs.aspx">Abot Us</a></li>
+            <li><a href="ContactUs.aspx">Contact Us</a></li>
+            <li><a href="Search.aspx">Search</a></li>
+
+        </ul>
+        <!--
+        <div>
+            <a href="AboutUs.aspx">About Us</a>&nbsp; <a href="ContactUs.aspx">Contact Us</a>&nbsp; <a href="Search.aspx">Search</a>
+        </div>
+            -->
+        <!--This is my my content-->
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!--This is my footer-->
+        <div>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/images/surveyImage.png" />
+        </div>
+        
+    </form>
+</body>
+</html>
