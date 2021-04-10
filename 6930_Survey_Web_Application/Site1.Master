@@ -17,7 +17,7 @@
         
         <!--Navigation Bar-->
         <div class="topnav" id="myTopnav">
-            <a href="#" class="active">Home</a>
+            <a href="Home.aspx" class="active">Home</a>
             <a href="ContactUs.aspx">Contact</a>
             <a href="AboutUs.aspx">About</a>
             <a href="Search.aspx">Search</a>
@@ -25,6 +25,7 @@
                 <i class="fa fa-bars"></i>
             </a>
         </div>
+        <!--Contnt of my page--> 
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
