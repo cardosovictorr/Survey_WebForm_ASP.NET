@@ -164,6 +164,7 @@ namespace _6930_Survey_Web_Application
                 //System.Diagnostics.Debug.WriteLine("Answer = " + textBoxcontr.getControl().Text);
                 System.Diagnostics.Debug.WriteLine("Answer = " + textBoxcontr.Text);
 
+                //HERE ARE THE ANSWER OF THE USERS:
                 QuestionAnswers answer = new QuestionAnswers();
                 //answer.Option_text = textBoxcontr.getControl().Text;
                 answer.Option_text = textBoxcontr.Text;
