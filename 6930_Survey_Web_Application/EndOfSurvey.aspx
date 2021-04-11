@@ -17,4 +17,7 @@
     <p>
         <asp:Label ID="LabelMessage" runat="server" Text="Label"></asp:Label>
     </p>
+    <p>
+        <asp:Button ID="ButtonSaveSurvey" runat="server" OnClick="ButtonSaveSurvey_Click" Text="Save" />
+    </p>
 </asp:Content>
