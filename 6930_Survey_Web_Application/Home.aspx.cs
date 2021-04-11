@@ -36,50 +36,6 @@ namespace _6930_Survey_Web_Application
             {
                 QuestionText.Text = question.Question_text;
             }
-
-            /*
-            if (!IsPostBack)
-            {
-                InputType_DropDownList1.Items.Add(new ListItem("TextBox"));
-                InputType_DropDownList1.Items.Add(new ListItem("CheckBox"));
-                InputType_DropDownList1.Items.Add(new ListItem("Radio"));
-            }
-            else
-            {
-                string selectedControl = InputType_DropDownList1.SelectedItem.Text;
-                if (selectedControl.Equals("TextBox"))
-                {
-                    TextBox textBox1 = new TextBox();
-                    PlaceHolder1.Controls.Add(textBox1);
-
-                    textBox1.ID = "textBox1";
-                }
-                else if (selectedControl.Equals("CheckBox"))
-                {
-                    CheckBoxList checkBoxList1 = new CheckBoxList();
-                    checkBoxList1.Items.Add(new ListItem("ANZ"));
-                    checkBoxList1.Items.Add(new ListItem("CommBank"));
-                    checkBoxList1.Items.Add(new ListItem("WestBank"));
-                    checkBoxList1.Items.Add(new ListItem("SunCorp"));
-
-                    checkBoxList1.ID = "checkBoxList1";
-
-                    PlaceHolder1.Controls.Add(checkBoxList1);
-                }
-                else if (selectedControl.Equals("Radio"))
-                {
-                    RadioButtonList radioButtonList1 = new RadioButtonList();
-
-                    radioButtonList1.Items.Add(new ListItem("Male"));
-                    radioButtonList1.Items.Add(new ListItem("Female"));
-                    radioButtonList1.Items.Add(new ListItem("Other"));
-
-                    radioButtonList1.ID = "radioButtonList1";
-
-                    PlaceHolder1.Controls.Add(radioButtonList1);
-                }
-            }
-            */
         }
         private Question getNextQuestion(int currentQuestionId)
         {
@@ -89,6 +45,7 @@ namespace _6930_Survey_Web_Application
             {
                 //conn.Open();
                 SqlCommand cmd = new SqlCommand("select * from Question where Id =" + currentQuestionId, conn);
+                conn.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
 
                 if (rd.Read())
@@ -101,6 +58,104 @@ namespace _6930_Survey_Web_Application
                 //conn.Close();
             }
             return que;
+        }
+
+        protected void NextQuestionButton_Click(object sender, EventArgs e)
+        {
+            Stack<int> followUpQuestionList = (Stack<int>)Session["FOLLOWUP_ID_LIST"];
+
+            int currentQuestionIdInSession = followUpQuestionList.Pop();
+            Question question = getNextQuestion(currentQuestionIdInSession);
+
+            if (question.Next_q_id != null)
+            {
+                insertNextQuestionId((int)question.Next_q_id, followUpQuestionList);
+            }
+
+            if (question != null)
+            {
+                QuestionText.Text = question.Question_text;
+
+                if (question.Question_type.Equals("text"))
+                {
+                    TextBox textBox = new TextBox();
+                    textBox.ID = "AnswerTxtBox";
+                    PlaceHolder1.Controls.Add(textBox);
+                    //Session["CURRENT_QUESTION_TYPE"] = textBox.ID;
+                    
+                }
+                else if(question.Question_type.Equals("radio"))
+                {
+                    RadioButtonList radioBtnQuestion = new RadioButtonList();
+                    radioBtnQuestion.ID = "RadioButton";
+                    //Session["CURRENT_QUESTION_TYPE"] = radioBtnQuestion.ID;
+                    
+                    List<QuestionOption> questionOptions = getQuestionOptions(currentQuestionIdInSession);
+
+                    foreach (QuestionOption option in questionOptions)
+                    {
+                        ListItem newItem = new ListItem();
+                        newItem.Text = option.Option_text;
+                        radioBtnQuestion.Items.Add(newItem);
+                        //radioBtnQuestion.getControl().Items.Add(newItem);
+                    }
+                    PlaceHolder1.Controls.Add(radioBtnQuestion);
+                }
+                else if (question.Question_type.Equals("checkbox"))
+                {
+                    CheckBoxList checkBoxQuestion = new CheckBoxList();
+                    checkBoxQuestion.ID = "CheckBoxButton";
+                    //Session["CURRENT_QUESTION_TYPE"] = checkBoxQuestion.ID;
+
+                    List<QuestionOption> questionOptions = getQuestionOptions(currentQuestionIdInSession);
+
+                    foreach (QuestionOption option in questionOptions)
+                    {
+                        ListItem newItem = new ListItem();
+                        newItem.Value = option.Id.ToString();
+                        newItem.Text = option.Option_text;
+                        if (option.Next_q_id != null)
+                        {
+                            newItem.Attributes["nextQuestionId"] = option.Next_q_id.ToString();
+                        }
+                        checkBoxQuestion.Items.Add(newItem);
+                        //checkBoxQuestion.getControl().Items.Add(newItem);
+                    }
+                    PlaceHolder1.Controls.Add(checkBoxQuestion);
+                }
+            }
+        }
+        private void insertNextQuestionId(int nextQuestionId, Stack<int> followupList)
+        {
+            if (!followupList.Contains(nextQuestionId))
+            {
+                followupList.Push(nextQuestionId);
+            }
+        }
+
+        private List<QuestionOption> getQuestionOptions(int currentQuestionId)
+        {
+            List<QuestionOption> options = new List<QuestionOption>();
+
+            using (SqlConnection conn = new SqlConnection(connectionStr))
+            {
+                SqlCommand cmd = new SqlCommand("select * from Question_Options where q_id =" + currentQuestionId, conn);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+
+                QuestionOption opt = null;
+
+                while (rd.Read())
+                {
+                    opt = new QuestionOption();
+                    opt.Id = (int)rd["id"];
+                    opt.Option_text = rd["option_text"].ToString();
+                    opt.Next_q_id = rd["next_q_id"] as int?;
+                    options.Add(opt);
+                }
+            }
+            return options;
+                
         }
     }
 }

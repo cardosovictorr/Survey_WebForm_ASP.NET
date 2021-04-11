@@ -30,6 +30,10 @@
         display: none;
     }
 
+.spaceForQuestion {
+    background-color: #34C2A9;
+}
+
 @media screen and (max-width: 600px) {
     .topnav a:not(:first-child) {
         display: none;
