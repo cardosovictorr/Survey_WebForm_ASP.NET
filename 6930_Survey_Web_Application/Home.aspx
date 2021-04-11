@@ -2,17 +2,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p>
-    HOME PAGE!! DO THE SURVEY HERE</p>
+
+
+<div>
+    <h3>
+        &nbsp;</h3>
+    <asp:Label ID="QuestionText" runat="server" Text="Question Text" style="font-size: x-large"></asp:Label>
+</div>
 <p>
-    &nbsp;</p>
-<p>
-    <asp:Label ID="QuestionText" runat="server" Text="Question Text"></asp:Label>
+    <asp:Image ID="Image2" runat="server" Height="37px" ImageUrl="~/images/question_mark.png" Width="50px" />
 </p>
-<p>
+    <p>
     <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
 </p>
 <p>
-    <asp:Button ID="NextQuestionButton" runat="server" Text="Next" />
+    <asp:Button ID="NextQuestionButton" runat="server" Text="Next" OnClick="NextQuestionButton_Click" />
 </p>
 </asp:Content>
