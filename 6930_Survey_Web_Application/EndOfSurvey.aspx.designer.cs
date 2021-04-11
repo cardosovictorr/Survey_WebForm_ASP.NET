@@ -33,7 +33,7 @@ namespace _6930_Survey_Web_Application
         protected global::System.Web.UI.WebControls.Label LabelMessage;
 
         /// <summary>
-        /// SaveBtn control.
+        /// ButtonSaveSurvey control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
