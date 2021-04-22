@@ -21,9 +21,8 @@
             <a href="ContactUs.aspx">Contact</a>
             <a href="AboutUs.aspx">About</a>
             <a href="Search.aspx">Search</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
-            </a>
+            <br />
         </div>
         <!--Contnt of my page--> 
         <div class="spaceForQuestion">
@@ -32,11 +31,14 @@
         </div>
         <!--This is my footer-->
         <div>
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/images/surveyImage.png" />
         </div>
+        
+    <script src="myScript.js"></script>
+        <p>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/images/surveyImage.png" Height="152px" Width="346px" />
+        </p>
         
     </form>
 
-    <script src="myScript.js"></script>
-</body>
+    </body>
 </html>
