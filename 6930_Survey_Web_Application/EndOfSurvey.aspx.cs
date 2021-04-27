@@ -14,10 +14,21 @@ namespace _6930_Survey_Web_Application
     {
         private static string connectionStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         List<QuestionAnswers> questionAnswersInSession = null;
+        //List<Users_Respondents> respondentsAnswersInSession = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             questionAnswersInSession = (List<QuestionAnswers>)Session["Question_ANSWER_LIST"];
 
+            //respondentsAnswersInSession = (List<Users_Respondents>)Session["Question_ANSWER_LIST"];
+
+            //foreach (Users_Respondents answers in respondentsAnswersInSession)
+            //{
+            //    TableRow row = new TableRow();
+            //
+            //
+            //
+            //}
+            //
             foreach (QuestionAnswers answers in questionAnswersInSession)
             {
                 TableRow row = new TableRow();
@@ -47,6 +58,50 @@ namespace _6930_Survey_Web_Application
                 row.Cells.Add(optionIdCell);
 
                 quastionAnswerDisplayTable.Rows.Add(row);
+            }
+        }
+
+        private void saveAnswersData(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionStr))
+            {
+                String query = "INSERT INTO Users_Respondents (user_first_name, user_last_name, user_gender, user_state,user_post_code,user_bank_user_newspaper, user_bank_services, user_news_interests, user_age, user_email, user_bank_used) VALUES (@user_first_name, @user_last_name, @user_gender, @user_state, @user_post_code, @user_bank_user_newspaper, @user_bank_services, @user_news_interests, @user_age, @user_email, @user_bank_used)";
+                connection.Open();
+
+                foreach (QuestionAnswers answers in questionAnswersInSession)
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@questionId", answers.Q_id);
+
+                        if (answers.Option_id == null)
+                        {
+                            command.Parameters.AddWithValue("@optionId", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@optionId", answers.Option_id);
+                        }
+
+                        if (answers.Option_text == null)
+                        {
+                            command.Parameters.AddWithValue("@optionText", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@optionText", answers.Option_text);
+                        }
+
+                        int result = command.ExecuteNonQuery();
+                        if (result < 0)
+                        {
+                            Console.WriteLine("The data have not been inserted in the Database!");
+                            LabelMessage.Text = "The data have not been inserted in the Database!";
+                        }
+
+                    }
+                }
+
             }
         }
 
