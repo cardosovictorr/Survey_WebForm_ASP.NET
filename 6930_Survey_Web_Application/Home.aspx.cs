@@ -65,6 +65,7 @@ namespace _6930_Survey_Web_Application
                     {
                         ListItem newItem = new ListItem();
                         newItem.Text = option.Option_text;
+                        newItem.Value = option.Id.ToString();
                         radioBtnQuestion.Items.Add(newItem);
                         //radioBtnQuestion
                     }
@@ -102,7 +103,7 @@ namespace _6930_Survey_Web_Application
         private Question getNextQuestion(int currentQuestionId)
         {
             Question que = null;
-            
+
             using (SqlConnection conn = new SqlConnection(connectionStr))
             {
                 //conn.Open();
@@ -173,7 +174,7 @@ namespace _6930_Survey_Web_Application
                 questionAnswersInSession.Add(answer);
             }
             //else if (userControl is CheckBoxUserControl)
-            else if (userControl is CheckBox)
+            else if (userControl is CheckBoxList)
             {
                 //CheckBoxUserCOntrol checkBoxcontr = (checkBoxUserControl)userControl;
                 CheckBoxList checkBoxcontr = (CheckBoxList)userControl;
@@ -200,27 +201,47 @@ namespace _6930_Survey_Web_Application
                     }
                 }
 
-                    Session["UserAnswer"] = answerVar;
-                }
-                else
+                Session["UserAnswer"] = answerVar;
+            }
+            else
+            {
+                //CheckBoxUserCOntrol checkBoxcontr = (checkBoxUserControl)userControl;
+                RadioButtonList radioButtonContr = (RadioButtonList)userControl;
+                //foreach (ListItem item in checkBoxcontr.getControl().Items)
+
+                ListItem item = radioButtonContr.SelectedItem;
+                string answerVar = item.Text;
+
+                if (item.Attributes["nextQuestionId"] != null)
                 {
-                    //Radio button
+                    //followUpQuestion
+                    insertNextQuestionId(int.Parse(item.Attributes["nextQuestionId"]), followUpQuestionList);
                 }
 
-                //1.Identify which type of question is current question
-                //2. Access that question to get answer out from it
-                // Label.Tex = "Text labe;";
+                QuestionAnswers answer = new QuestionAnswers();
+                answer.Option_text = item.Text;
+                answer.Q_id = currentQuestionIdInSession;
+                answer.Option_id = int.Parse(item.Value);
 
-                if (followUpQuestionList.Count() > 0)
-                {
-                    //Session["CURRENT_QUESTION_ID"] = question.nextQuestionId;
-                    Response.Redirect("Home.aspx");
-                }
-                else
-                {
-                    Response.Redirect("EndOfSurvey.aspx");
-                }
-            
+                questionAnswersInSession.Add(answer);
+
+                Session["UserAnswer"] = answerVar;
+            }
+
+            //1.Identify which type of question is current question
+            //2. Access that question to get answer out from it
+            // Label.Tex = "Text labe;";
+
+            if (followUpQuestionList.Count() > 0)
+            {
+                //Session["CURRENT_QUESTION_ID"] = question.nextQuestionId;
+                Response.Redirect("Home.aspx");
+            }
+            else
+            {
+                Response.Redirect("EndOfSurvey.aspx");
+            }
+
             //HERE CLOSE
 
             /*
@@ -312,7 +333,7 @@ namespace _6930_Survey_Web_Application
                 }
             }
             return options;
-                
+
         }
     }
 }
