@@ -170,6 +170,7 @@ namespace _6930_Survey_Web_Application
                 //answer.Option_text = textBoxcontr.getControl().Text;
                 answer.Option_text = textBoxcontr.Text;
                 answer.Q_id = currentQuestionIdInSession;
+                
 
                 questionAnswersInSession.Add(answer);
             }
