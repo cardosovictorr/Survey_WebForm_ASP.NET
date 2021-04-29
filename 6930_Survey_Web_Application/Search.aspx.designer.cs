@@ -42,6 +42,15 @@ namespace _6930_Survey_Web_Application
         protected global::System.Web.UI.WebControls.Button SearchBtn;
 
         /// <summary>
+        /// allQuestionButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button allQuestionButton;
+
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,69 @@ namespace _6930_Survey_Web_Application
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button searchInResponsesButton;
+
+        /// <summary>
+        /// seeAllAnswersButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button seeAllAnswersButton;
+
+        /// <summary>
+        /// byStatesTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox byStatesTextBox;
+
+        /// <summary>
+        /// searchByStateButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button searchByStateButton;
+
+        /// <summary>
+        /// byRegisterTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox byRegisterTextBox;
+
+        /// <summary>
+        /// byRegisteredButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button byRegisteredButton;
+
+        /// <summary>
+        /// seeAllRegisteredButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button seeAllRegisteredButton;
+
+        /// <summary>
+        /// typeTableLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label typeTableLabel;
 
         /// <summary>
         /// GridView1 control.
