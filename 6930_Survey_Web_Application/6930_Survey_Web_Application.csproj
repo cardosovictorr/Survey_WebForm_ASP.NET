@@ -81,6 +81,8 @@
     <Content Include="Home.aspx" />
     <Content Include="images\question_mark.png" />
     <Content Include="images\surveyImage.png" />
+    <Content Include="images\Thanks.png" />
+    <Content Include="images\thank_you.png" />
     <Content Include="LoginStaff.aspx" />
     <Content Include="myScript.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -184,6 +186,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Search.aspx" />
     <Content Include="Styles.css" />
+    <Content Include="ThankYou.aspx" />
     <Content Include="UserRegistration.aspx" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -254,6 +257,13 @@
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
     <Compile Include="Model\Users_Respondents.cs" />
+    <Compile Include="ThankYou.aspx.cs">
+      <DependentUpon>ThankYou.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ThankYou.aspx.designer.cs">
+      <DependentUpon>ThankYou.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserRegistration.aspx.cs">
       <DependentUpon>UserRegistration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
