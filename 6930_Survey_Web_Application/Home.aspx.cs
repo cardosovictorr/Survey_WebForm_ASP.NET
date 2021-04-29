@@ -126,9 +126,37 @@ namespace _6930_Survey_Web_Application
         protected void NextQuestionButton_Click(object sender, EventArgs e)
         {
             //HERE
-
             //Access the actual question from the Placeholder
             Control userControl = PlaceHolder1.FindControl(Session["CURRENT_QUESTION_TYPE"].ToString());
+
+            if (userControl is TextBox)
+            {
+                TextBox textBoxcontr = (TextBox)userControl;
+                if (textBoxcontr.Text == "")
+                {
+                    Console.WriteLine("Please, write a valid answer!");
+                    return;
+                }
+            }
+            else if (userControl is CheckBoxList)
+            {
+                CheckBoxList checkBoxcontr = (CheckBoxList)userControl;
+                if (checkBoxcontr.SelectedIndex == -1)
+                {
+                    Console.WriteLine("Please,  a valid answer!");
+                    return;
+                }
+            }else
+            {
+                RadioButtonList radioButtonContr = (RadioButtonList)userControl;
+                if (radioButtonContr.SelectedIndex == -1)
+                {
+                    Console.WriteLine("Please,  a valid answer!");
+                    return;
+                }
+            }
+
+
 
             //Access question answers from session:
             List<QuestionAnswers> questionAnswersInSession = (List<QuestionAnswers>)Session["Question_ANSWER_LIST"];
@@ -154,6 +182,7 @@ namespace _6930_Survey_Web_Application
 
             //HERE
 
+
             //if (userControl is TextBoxUserControl)
             if (userControl is TextBox)
             {
@@ -170,7 +199,9 @@ namespace _6930_Survey_Web_Application
                 //answer.Option_text = textBoxcontr.getControl().Text;
                 answer.Option_text = textBoxcontr.Text;
                 answer.Q_id = currentQuestionIdInSession;
-                
+
+
+
 
                 questionAnswersInSession.Add(answer);
             }
@@ -180,6 +211,7 @@ namespace _6930_Survey_Web_Application
                 //CheckBoxUserCOntrol checkBoxcontr = (checkBoxUserControl)userControl;
                 CheckBoxList checkBoxcontr = (CheckBoxList)userControl;
                 string answerVar = "";
+
                 //foreach (ListItem item in checkBoxcontr.getControl().Items)
                 foreach (ListItem item in checkBoxcontr.Items)
                 {
@@ -197,6 +229,8 @@ namespace _6930_Survey_Web_Application
                         answer.Option_text = item.Text;
                         answer.Q_id = currentQuestionIdInSession;
                         answer.Option_id = int.Parse(item.Value);
+
+
 
                         questionAnswersInSession.Add(answer);
                     }
@@ -229,6 +263,9 @@ namespace _6930_Survey_Web_Application
                 Session["UserAnswer"] = answerVar;
             }
 
+
+
+
             //1.Identify which type of question is current question
             //2. Access that question to get answer out from it
             // Label.Tex = "Text labe;";
@@ -245,60 +282,7 @@ namespace _6930_Survey_Web_Application
 
             //HERE CLOSE
 
-            /*
-            if (question != null)
-            {
-                QuestionText.Text = question.Question_text;
 
-                if (question.Question_type.Equals("text"))
-                {
-                    TextBox textBox = new TextBox();
-                    textBox.ID = "AnswerTxtBox";
-                    PlaceHolder1.Controls.Add(textBox);
-                    //Session["CURRENT_QUESTION_TYPE"] = textBox.ID;
-                    
-                }
-                else if(question.Question_type.Equals("radio"))
-                {
-                    RadioButtonList radioBtnQuestion = new RadioButtonList();
-                    radioBtnQuestion.ID = "RadioButton";
-                    //Session["CURRENT_QUESTION_TYPE"] = radioBtnQuestion.ID;
-                    
-                    List<QuestionOption> questionOptions = getQuestionOptions(currentQuestionIdInSession);
-
-                    foreach (QuestionOption option in questionOptions)
-                    {
-                        ListItem newItem = new ListItem();
-                        newItem.Text = option.Option_text;
-                        radioBtnQuestion.Items.Add(newItem);
-                        //radioBtnQuestion.getControl().Items.Add(newItem);
-                    }
-                    PlaceHolder1.Controls.Add(radioBtnQuestion);
-                }
-                else if (question.Question_type.Equals("checkbox"))
-                {
-                    CheckBoxList checkBoxQuestion = new CheckBoxList();
-                    checkBoxQuestion.ID = "CheckBoxButton";
-                    //Session["CURRENT_QUESTION_TYPE"] = checkBoxQuestion.ID;
-
-                    List<QuestionOption> questionOptions = getQuestionOptions(currentQuestionIdInSession);
-
-                    foreach (QuestionOption option in questionOptions)
-                    {
-                        ListItem newItem = new ListItem();
-                        newItem.Value = option.Id.ToString();
-                        newItem.Text = option.Option_text;
-                        if (option.Next_q_id != null)
-                        {
-                            newItem.Attributes["nextQuestionId"] = option.Next_q_id.ToString();
-                        }
-                        checkBoxQuestion.Items.Add(newItem);
-                        //checkBoxQuestion.getControl().Items.Add(newItem);
-                    }
-                    PlaceHolder1.Controls.Add(checkBoxQuestion);
-                }
-            }
-            */
         }
 
         //method to add the next question to the stack:

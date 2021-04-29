@@ -81,6 +81,7 @@
     <Content Include="Home.aspx" />
     <Content Include="images\question_mark.png" />
     <Content Include="images\surveyImage.png" />
+    <Content Include="LoginStaff.aspx" />
     <Content Include="myScript.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -183,6 +184,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Search.aspx" />
     <Content Include="Styles.css" />
+    <Content Include="UserRegistration.aspx" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -224,6 +226,13 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LoginStaff.aspx.cs">
+      <DependentUpon>LoginStaff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginStaff.aspx.designer.cs">
+      <DependentUpon>LoginStaff.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Model\Question.cs" />
     <Compile Include="Model\QuestionAnswers.cs" />
     <Compile Include="Model\QuestionOption.cs" />
@@ -243,6 +252,13 @@
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
     <Compile Include="Model\Users_Respondents.cs" />
+    <Compile Include="UserRegistration.aspx.cs">
+      <DependentUpon>UserRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserRegistration.aspx.designer.cs">
+      <DependentUpon>UserRegistration.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
