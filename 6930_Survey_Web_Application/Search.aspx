@@ -7,7 +7,13 @@
 
 <asp:TextBox ID="UserSearchText" runat="server"></asp:TextBox>
                 <asp:Button ID="SearchBtn" runat="server" Text="Search" OnClick="SearchBtn_Click" />
-    <asp:PlaceHolder ID="PlaceHolder1" runat="server">Content</asp:PlaceHolder>
+    <br />
+    <br />
+    <!--<asp:PlaceHolder ID="PlaceHolder1" runat="server">Content</asp:PlaceHolder>-->
+                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+    <asp:Button ID="searchInResponsesButton" runat="server" Text="Search Response" />
+    <br />
+    <br />
                 <asp:GridView ID="GridView1" runat="server">
                 </asp:GridView>
     

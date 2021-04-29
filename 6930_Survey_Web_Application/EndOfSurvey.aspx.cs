@@ -20,96 +20,100 @@ namespace _6930_Survey_Web_Application
         protected void Page_Load(object sender, EventArgs e)
         {
             questionAnswersInSession = (List<QuestionAnswers>)Session["Question_ANSWER_LIST"];
-
-            //respondentsAnswersInSession = (List<Users_Respondents>)Session["UserAnswer"];
-
-            //foreach (Users_Respondents answers in respondentsAnswersInSession)
-            //{
-            //    TableRow row = new TableRow();
-            //
-            //
-            //
-            //}
-            //
-            foreach (QuestionAnswers answers in questionAnswersInSession)
+            try
             {
-                TableRow row = new TableRow();
+                foreach (QuestionAnswers answers in questionAnswersInSession)
+                {
+                    TableRow row = new TableRow();
 
-                //QUestions id will be here
-                TableCell questionIdCell = new TableCell();
+                    //QUestions id will be here
+                    TableCell questionIdCell = new TableCell();
 
-                //setting question id of the answer to table cell
-                questionIdCell.Text = answers.Q_id.ToString();
-                row.Cells.Add(questionIdCell);
+                    //setting question id of the answer to table cell
+                    questionIdCell.Text = answers.Q_id.ToString();
+                    row.Cells.Add(questionIdCell);
 
-                //Question answer text cell her:
-                TableCell answerTextCell = new TableCell();
-                answerTextCell.Text = answers.Option_text;
-                row.Cells.Add(answerTextCell);
+                    //Question answer text cell her:
+                    TableCell answerTextCell = new TableCell();
+                    answerTextCell.Text = answers.Option_text;
+                    row.Cells.Add(answerTextCell);
 
-                //ADDING A NEW OBJECT HERE FOR USER REPONDENTS TABLE
-                //Here I am creating a object in my class User Respondets to use it later
+                    //ADDING A NEW OBJECT HERE FOR USER REPONDENTS TABLE
+                    //Here I am creating a object in my class User Respondets to use it later
 
-                if (answers.Q_id == 1)
-                {
-                    responses.User_first_name = answers.Option_text;
-                    //respondentsAnswersInSession.Add(text_response);
-                }
-                else if (answers.Q_id == 2)
-                {
-                    responses.User_state = answers.Option_text;
-                    //respondentsAnswersInSession.Add(responses);
-                }
-                else if (answers.Q_id == 3)
-                {
-                    responses.User_gender = answers.Option_text;
-                    //respondentsAnswersInSession.Add(responses);
-                }
-                else if (answers.Q_id == 4)
-                {
-                    responses.User_post_code = answers.Option_text;
-                    //respondentsAnswersInSession.Add(responses);
-                }
-                else if (answers.Q_id == 5)
-                {
-                    responses.User_age = answers.Option_text;
-                    //respondentsAnswersInSession.Add(responses);
-                }
-                else if (answers.Q_id == 6)
-                {
-                    responses.User_email = answers.Option_text;
-                    //respondentsAnswersInSession.Add(responses);
-                }
-                else if (answers.Q_id == 7)
-                {
-                    responses.User_bank = answers.Option_text;
-                    //respondentsAnswersInSession.Add(responses);
-                }
-                else if (answers.Q_id == 8)
-                {
-                    responses.User_bank_services = answers.Option_text;
-                    //respondentsAnswersInSession.Add(responses);
-                }
-                else if (answers.Q_id == 9)
-                {
-                    responses.User_newspaper = answers.Option_text;
-                    //respondentsAnswersInSession.Add(responses);
-                }
+                    if (answers.Q_id == 1)
+                    {
+                        responses.User_first_name = answers.Option_text;
+                        //respondentsAnswersInSession.Add(text_response);
+                    }
+                    else if (answers.Q_id == 2)
+                    {
+                        responses.User_state = answers.Option_text;
+                        //respondentsAnswersInSession.Add(responses);
+                    }
+                    else if (answers.Q_id == 3)
+                    {
+                        responses.User_gender = answers.Option_text;
+                        //respondentsAnswersInSession.Add(responses);
+                    }
+                    else if (answers.Q_id == 4)
+                    {
+                        responses.User_post_code = answers.Option_text;
+                        //respondentsAnswersInSession.Add(responses);
+                    }
+                    else if (answers.Q_id == 5)
+                    {
+                        responses.User_age = answers.Option_text;
+                        //respondentsAnswersInSession.Add(responses);
+                    }
+                    else if (answers.Q_id == 6)
+                    {
+                        responses.User_email = answers.Option_text;
+                        //respondentsAnswersInSession.Add(responses);
+                    }
+                    else if (answers.Q_id == 7)
+                    {
+                        responses.User_bank = answers.Option_text;
+                        //respondentsAnswersInSession.Add(responses);
+                    }
+                    else if (answers.Q_id == 8)
+                    {
+                        responses.User_bank_services = answers.Option_text;
+                        //respondentsAnswersInSession.Add(responses);
+                    }
+                    else if (answers.Q_id == 9)
+                    {
+                        responses.User_newspaper = answers.Option_text;
+                        //respondentsAnswersInSession.Add(responses);
+                    }
 
-                TableCell optionIdCell = new TableCell();
-                if (answers.Option_id != null)
-                {
-                    optionIdCell.Text = answers.Option_id.ToString();
-                }
-                else
-                {
-                    optionIdCell.Text = "";
-                }
+                    TableCell optionIdCell = new TableCell();
+                    if (answers.Option_id != null)
+                    {
+                        optionIdCell.Text = answers.Option_id.ToString();
+                    }
+                    else
+                    {
+                        optionIdCell.Text = "";
+                    }
 
-                row.Cells.Add(optionIdCell);
+                    row.Cells.Add(optionIdCell);
 
-                quastionAnswerDisplayTable.Rows.Add(row);
+                    quastionAnswerDisplayTable.Rows.Add(row);
+                }
             }
+            //this error is in case there is no answers from the user. 
+            catch (NullReferenceException nrex)
+            {
+                questionAnswersInSession = new List<QuestionAnswers>();
+            }
+            //if the error is not handled before (e.g: nullReference) the error will be handle in the following:
+            catch(Exception ex) 
+            {
+                //ex.Message
+                return;
+            }
+            
         }
 
         private void saveAnswersData(object sender, EventArgs e)
@@ -214,13 +218,23 @@ namespace _6930_Survey_Web_Application
                         {
                             command.Parameters.AddWithValue("@optionText", answers.Option_text);
                         }
-
-                        int result = command.ExecuteNonQuery();
-                        if (result < 0)
+                        //checking with error handling if the data has been saved properly
+                        try
                         {
-                            Console.WriteLine("The data have not been inserted in the Database!");
-                            LabelMessage.Text = "The data have not been inserted in the Database!";
+                            int result = command.ExecuteNonQuery();
+                            if (result < 0)
+                            {
+                                Console.WriteLine("The data have not been inserted in the Database!");
+                                LabelMessage.Text = "The data have not been inserted in the Database!";
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            string messageError = ex.Message;
+                            Console.WriteLine("The database has an issue " + messageError);
+
+                        }
+                        
 
                     }
                 }
