@@ -11,37 +11,37 @@
     <link href="Styles.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 <body>
     <form id="form1" runat="server">
-        
+
         <!--Navigation Bar-->
         <div class="topnav" id="myTopnav">
             <a href="Home.aspx" class="active">Home</a>
             <a href="ContactUs.aspx">Contact</a>
             <a href="AboutUs.aspx">About</a>
             <a href="Search.aspx">Search</a>
-                <i class="fa fa-bars"></i>
+            <i class="fa fa-bars"></i>
             <br />
         </div>
-        <!--Contnt of my page--> 
+
+
+        <!--Content of my page-->
         <div class="spaceForQuestion">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+
         <!--This is my footer-->
-        <div>
-            <br />
-            <br />
-        </div>
-        
-    <script src="myScript.js"></script>
+  
+
+        <script src="myScript.js"></script>
         <p>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/images/surveyImage.png" Height="152px" Width="346px" />
         </p>
-        
+
     </form>
 
-    </body>
+</body>
 </html>

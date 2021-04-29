@@ -15,6 +15,11 @@
     <p>
     <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
 </p>
+    <p>
+        &nbsp;</p>
+    <p>
+        <asp:Label ID="errorMessageLabel" runat="server"></asp:Label>
+</p>
 <p>
     <asp:Button ID="NextQuestionButton" runat="server" Text="Next" OnClick="NextQuestionButton_Click" />
 </p>

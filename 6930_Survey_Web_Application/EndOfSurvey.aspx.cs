@@ -16,6 +16,9 @@ namespace _6930_Survey_Web_Application
         List<QuestionAnswers> questionAnswersInSession = null;
         //List<Users_Respondents> respondentsAnswersInSession = null;
 
+
+        //ADDING A NEW OBJECT HERE FOR USER REPONDENTS TABLE
+        //Here I am creating a object in my class User Respondets to use it later
         Users_Respondents responses = new Users_Respondents();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,8 +41,6 @@ namespace _6930_Survey_Web_Application
                     answerTextCell.Text = answers.Option_text;
                     row.Cells.Add(answerTextCell);
 
-                    //ADDING A NEW OBJECT HERE FOR USER REPONDENTS TABLE
-                    //Here I am creating a object in my class User Respondets to use it later
 
                     if (answers.Q_id == 1)
                     {
@@ -105,6 +106,7 @@ namespace _6930_Survey_Web_Application
             //this error is in case there is no answers from the user. 
             catch (NullReferenceException nrex)
             {
+                
                 questionAnswersInSession = new List<QuestionAnswers>();
             }
             //if the error is not handled before (e.g: nullReference) the error will be handle in the following:
@@ -240,6 +242,7 @@ namespace _6930_Survey_Web_Application
                 }
 
             }
+            Response.Redirect("UserRegistration.aspx");
         }
     }
 }

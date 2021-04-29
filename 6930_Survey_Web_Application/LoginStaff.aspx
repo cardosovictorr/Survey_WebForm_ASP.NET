@@ -11,5 +11,8 @@
     <asp:TextBox ID="passwordTextBox" runat="server"></asp:TextBox>
     <br />
     <br />
+    <asp:Label ID="errorStaffLabel" runat="server"></asp:Label>
+    <br />
+    <br />
     <asp:Button ID="enterButton" runat="server" BorderStyle="None" OnClick="enterButton_Click" Text="Enter" />
 </asp:Content>
