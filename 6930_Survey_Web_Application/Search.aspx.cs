@@ -32,11 +32,31 @@ namespace _6930_Survey_Web_Application
             }
         }
 
+        private void getAnswersData(string searchText)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionStr))
+            {
+                SqlCommand cmd = new SqlCommand("Select * from Users_Respondents where user_state like @option_text", conn);
+                cmd.Parameters.AddWithValue("option_text", "%" + searchText + "%");
+
+                conn.Open();
+
+                GridView1.DataSource = cmd.ExecuteReader();
+                GridView1.DataBind();
+            }
+                
+        }
+
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
             string inputFromUser = UserSearchText.Text;
             getQuestionData(inputFromUser);
         }
 
+        protected void searchInResponsesButton_Click(object sender, EventArgs e)
+        {
+            string inputFromUser = byResponsesTextBox.Text;
+            getAnswersData(inputFromUser);
+        }
     }
 }

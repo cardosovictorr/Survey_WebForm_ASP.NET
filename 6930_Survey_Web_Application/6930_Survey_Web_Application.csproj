@@ -236,6 +236,8 @@
     <Compile Include="Model\Question.cs" />
     <Compile Include="Model\QuestionAnswers.cs" />
     <Compile Include="Model\QuestionOption.cs" />
+    <Compile Include="Model\Staff.cs" />
+    <Compile Include="Model\User_Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>

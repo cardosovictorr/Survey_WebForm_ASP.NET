@@ -106,7 +106,7 @@ namespace _6930_Survey_Web_Application
 
             using (SqlConnection conn = new SqlConnection(connectionStr))
             {
-                //conn.Open();
+                
                 SqlCommand cmd = new SqlCommand("select * from Question where Id =" + currentQuestionId, conn);
                 conn.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
@@ -128,13 +128,16 @@ namespace _6930_Survey_Web_Application
             //HERE
             //Access the actual question from the Placeholder
             Control userControl = PlaceHolder1.FindControl(Session["CURRENT_QUESTION_TYPE"].ToString());
-
+            
+            //On the following if ans else, I am making sure that the user is answering the questions
             if (userControl is TextBox)
             {
                 TextBox textBoxcontr = (TextBox)userControl;
                 if (textBoxcontr.Text == "")
                 {
-                    Console.WriteLine("Please, write a valid answer!");
+                    //Console.WriteLine("Please, write a valid answer!");
+                    //errorMessageLabel.Visible = true;
+                    errorMessageLabel.Text = "Please, provide an answer!";
                     return;
                 }
             }
@@ -143,7 +146,8 @@ namespace _6930_Survey_Web_Application
                 CheckBoxList checkBoxcontr = (CheckBoxList)userControl;
                 if (checkBoxcontr.SelectedIndex == -1)
                 {
-                    Console.WriteLine("Please,  a valid answer!");
+                    //Console.WriteLine("Please,  a valid answer!");
+                    errorMessageLabel.Text = "Please, provide an answer!";
                     return;
                 }
             }else
@@ -151,12 +155,11 @@ namespace _6930_Survey_Web_Application
                 RadioButtonList radioButtonContr = (RadioButtonList)userControl;
                 if (radioButtonContr.SelectedIndex == -1)
                 {
-                    Console.WriteLine("Please,  a valid answer!");
+                    //Console.WriteLine("Please,  a valid answer!");
+                    errorMessageLabel.Text = "Please, provide an answer!";
                     return;
                 }
             }
-
-
 
             //Access question answers from session:
             List<QuestionAnswers> questionAnswersInSession = (List<QuestionAnswers>)Session["Question_ANSWER_LIST"];
@@ -179,11 +182,10 @@ namespace _6930_Survey_Web_Application
                 insertNextQuestionId((int)question.Next_q_id, followUpQuestionList);
             }
 
-
             //HERE
 
 
-            //if (userControl is TextBoxUserControl)
+            //if userControl is supposed to be a TextBoxUserControl, I create here
             if (userControl is TextBox)
             {
                 //TextBoxUserCOnttrol textBoxcontr = (TextBoxUserControl)userControl;
@@ -199,9 +201,6 @@ namespace _6930_Survey_Web_Application
                 //answer.Option_text = textBoxcontr.getControl().Text;
                 answer.Option_text = textBoxcontr.Text;
                 answer.Q_id = currentQuestionIdInSession;
-
-
-
 
                 questionAnswersInSession.Add(answer);
             }
@@ -229,8 +228,6 @@ namespace _6930_Survey_Web_Application
                         answer.Option_text = item.Text;
                         answer.Q_id = currentQuestionIdInSession;
                         answer.Option_id = int.Parse(item.Value);
-
-
 
                         questionAnswersInSession.Add(answer);
                     }
@@ -262,9 +259,6 @@ namespace _6930_Survey_Web_Application
 
                 Session["UserAnswer"] = answerVar;
             }
-
-
-
 
             //1.Identify which type of question is current question
             //2. Access that question to get answer out from it
