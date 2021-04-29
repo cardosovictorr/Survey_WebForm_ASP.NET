@@ -33,6 +33,8 @@
         <asp:Label ID="messageLabel" runat="server"></asp:Label>
     </p>
     <p>
-        <asp:Button ID="registerButton" runat="server" Text="Register" OnClick="registerButton_Click" />
+        <asp:Button ID="registerButton" runat="server" Text="I want Register" OnClick="registerButton_Click" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="noRegisterButton" runat="server" OnClick="noRegisterButton_Click" Text="I don't want Register" />
     </p>
 </asp:Content>
