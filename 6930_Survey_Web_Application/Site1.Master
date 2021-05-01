@@ -20,7 +20,7 @@
             <a href="Home.aspx" class="active">Home</a>
             <a href="ContactUs.aspx">Contact</a>
             <a href="AboutUs.aspx">About</a>
-            <a href="Search.aspx">Search</a>
+            <a href="LoginStaff.aspx">Search</a>
             <i class="fa fa-bars"></i>
             <br />
         </div>

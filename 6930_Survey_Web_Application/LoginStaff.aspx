@@ -8,11 +8,12 @@
     <p>
         <asp:TextBox ID="UserNameTextBox" runat="server"></asp:TextBox>
     </p>
-    <asp:TextBox ID="passwordTextBox" runat="server"></asp:TextBox>
+    <asp:TextBox ID="passwordTextBox" runat="server" TextMode="Password"></asp:TextBox>
     <br />
     <br />
     <asp:Label ID="errorStaffLabel" runat="server"></asp:Label>
     <br />
     <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="enterButton" runat="server" BorderStyle="None" OnClick="enterButton_Click" Text="Enter" />
 </asp:Content>
