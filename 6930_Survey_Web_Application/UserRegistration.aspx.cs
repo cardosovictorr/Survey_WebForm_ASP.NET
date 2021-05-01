@@ -72,6 +72,7 @@ namespace _6930_Survey_Web_Application
             }
 
             //send to Thank you Page
+            Response.Redirect("ThankYou.aspx");
         }
 
         protected void noRegisterButton_Click(object sender, EventArgs e)

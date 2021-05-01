@@ -22,18 +22,54 @@ namespace _6930_Survey_Web_Application
             //get input from the user
             string staffNameInput = UserNameTextBox.Text;
             string staffPassInput = passwordTextBox.Text;
+            if (checkStaff(staffNameInput, staffPassInput))
+            {
+                //check if username and password are correct
+                //send to the search page
+                Response.Redirect("Search.aspx");
+            }
+            else {
+                errorStaffLabel.Text = "Staff not valid!";
+            }
 
-            //check if username and password are correct
-            //send to the search page
+
+
+
 
             //checkStaff(staffNameInput, staffPassInput);
-            
-            Response.Redirect("Search.aspx");
+
         }
 
-        private void checkStaff(string username, string password)
+        private bool checkStaff(string username, string password)
         {
-            
+
+            using (SqlConnection conn = new SqlConnection(connectionStr))
+            {
+
+                SqlCommand cmd = new SqlCommand("select * from staff where staff_name = '" + username + "' AND staff_pass = '" + password + "'", conn);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+
+                int count = 0;
+
+                while (rd.Read())
+                {
+                    count++;
+                }
+
+                if (count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+
+                    return false;
+                }
+
+            }
+
+            /*
             using (SqlConnection conn = new SqlConnection(connectionStr))
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM Parent WHERE [staff_name]=@staffName AND [staff_pass]=@password", conn);
@@ -41,40 +77,40 @@ namespace _6930_Survey_Web_Application
 
                 cmd.Parameters.AddWithValue("@staffName", username);
                 cmd.Parameters.AddWithValue("@password", password);
+            */
+            //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            //DataTable table
 
-                //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                //DataTable table
+            //int result = cmd.ExecuteNonQuery();
 
-                //int result = cmd.ExecuteNonQuery();
+            //SqlDataReader dr = cmd.ExecuteReader();
 
-                //SqlDataReader dr = cmd.ExecuteReader();
+            //if (dr.Read())
+            //{
+            //    conn.Close();
+            //    dr.Close();
+            //    Response.Redirect("Search.aspx");
+            //}
+            //else
+            //{
+            //    errorStaffLabel.Text = "Invalid User! Try again with VALID username and password";
+            //}
+            //if (!dr.IsClosed)
+            //    dr.Close();
 
-                //if (dr.Read())
-                //{
-                //    conn.Close();
-                //    dr.Close();
-                //    Response.Redirect("Search.aspx");
-                //}
-                //else
-                //{
-                //    errorStaffLabel.Text = "Invalid User! Try again with VALID username and password";
-                //}
-                //if (!dr.IsClosed)
-                //    dr.Close();
+            //if (result < 0)
+            //{
+            //    Console.WriteLine("The data have not been inserted in the Database!");
+            //    errorStaffLabel.Text = "The data have not been inserted in the Database!";
+            //} else
+            //{
+            //    Response.Redirect("Search.aspx");
+            //}
 
-                //if (result < 0)
-                //{
-                //    Console.WriteLine("The data have not been inserted in the Database!");
-                //    errorStaffLabel.Text = "The data have not been inserted in the Database!";
-                //} else
-                //{
-                //    Response.Redirect("Search.aspx");
-                //}
-
-                conn.Close();
+            //conn.Close();
 
 
-            }
         }
     }
+
 }
